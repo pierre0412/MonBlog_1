@@ -1,16 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Le titre de la partie blog{% endblock %}</title>
+    <link href="{% static "css/blog.css" %}" rel="stylesheet">
 </head>
 <body>
-{% block content %}
-    <h1>Bienvenue sur la partie blog</h1>
-    {% for article in articles_list %}
-        <p>{{ article.title }} écrit par <b>{{ article.author }}</b> le <i>{{ article.created }}</i></p>
-    {% endfor %}
-{% endblock %}
-
+    <div id="content">
+        {% block content %}
+        <h1>Bienvenue sur la partie blog</h1>
+        {% for article in articles_list %}
+            <p>{{ article.title }} écrit par <b>{{ article.author }}</b> le <i>{{ article.created }}</i></p>
+        {% endfor %}
+        {% endblock %}
+    </div>
+    <div id="sidebar">
+        <h2>Mon blog</h2>
+        <p>Ceci est mon blog.</p>
+    </div>
 </body>
 </html>
