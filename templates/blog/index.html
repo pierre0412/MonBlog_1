@@ -10,7 +10,7 @@
     <div id="content">
         {% block content %}
         <h1>Bienvenue sur la partie blog</h1>
-        {% for article in articles_list %}
+        {% for article in article_list %}
             <p>{{ article.title }} écrit par <b>{{ article.author }}</b> le <i>{{ article.created }}</i></p>
         {% endfor %}
         {% endblock %}

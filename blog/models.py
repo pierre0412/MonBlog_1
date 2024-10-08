@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 
 class PublishedManager(models.Manager):
@@ -14,7 +15,7 @@ class Article(models.Model):
         PUBLISHED = 'PB', 'Published'
 
     title = models.CharField("titre", max_length=100)
-    slug = models.SlugField("slug", max_length=200, null=True, unique=True)
+    slug = models.SlugField("slug", max_length=200, unique_for_date='created')
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -31,3 +32,10 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("blog:article_detail",
+                       args=[self.created.year,
+                             self.created.month,
+                             self.created.day,
+                             self.slug])
